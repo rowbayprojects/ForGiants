@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://ds33bg25i5v26"]
+
+[ext_resource type="Script" path="res://Forge/lever.gd" id="1_412ub"]
+[ext_resource type="Texture2D" uid="uid://cfju5qn06jnkt" path="res://Forge/lever.png" id="1_wa1be"]
+[ext_resource type="AudioStream" uid="uid://2eg6qivp04a7" path="res://Audio/SFX/switch.ogg" id="3_ietnv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nlg7h"]
+size = Vector2(16, 16)
+
+[node name="Lever" type="StaticBody2D" groups=["lever"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_412ub")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wa1be")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nlg7h")
+
+[node name="Switch" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ietnv")
+volume_db = -6.559
+bus = &"SFX"

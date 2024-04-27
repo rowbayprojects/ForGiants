@@ -1,0 +1,81 @@
+[gd_scene load_steps=7 format=3 uid="uid://db12vr8xor360"]
+
+[ext_resource type="Script" path="res://Utilities/main_menu.gd" id="1_7wl3t"]
+[ext_resource type="Theme" uid="uid://byja5y2s5n60f" path="res://Utilities/theme.tres" id="1_u0xf1"]
+[ext_resource type="Texture2D" uid="uid://n3tqlm8g8h1" path="res://Utilities/title.png" id="3_kchln"]
+[ext_resource type="PackedScene" uid="uid://bqhsr33tym3w1" path="res://Utilities/options_menu.tscn" id="3_tktol"]
+[ext_resource type="AudioStream" uid="uid://ds756x5iok4x" path="res://Audio/Intense Forging.mp3" id="5_eklrv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xuc7i"]
+font_size = 200
+
+[node name="MainMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_u0xf1")
+script = ExtResource("1_7wl3t")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_kchln")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 200
+
+[node name="Label" type="Label" parent="VBoxContainer2/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "For Giants"
+label_settings = SubResource("LabelSettings_xuc7i")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(1024, 512)
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Start"
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit"
+
+[node name="OptionsMenu" parent="." instance=ExtResource("3_tktol")]
+visible = false
+layout_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_eklrv")
+volume_db = -9.369
+autoplay = true
+bus = &"Music"
+
+[connection signal="exit_options_menu" from="OptionsMenu" to="." method="_on_options_menu_exit_options_menu"]

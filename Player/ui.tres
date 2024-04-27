@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://btr2ca8cvinbl"]
+
+[ext_resource type="FontFile" uid="uid://v7bfuoxqcegb" path="res://Player/Minimal5x7.ttf" id="1_hd5pb"]
+
+[resource]
+resource_local_to_scene = true
+font = ExtResource("1_hd5pb")
+font_size = 100
+shadow_color = Color(0, 0, 0, 1)

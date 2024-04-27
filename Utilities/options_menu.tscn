@@ -1,0 +1,222 @@
+[gd_scene load_steps=9 format=3 uid="uid://bqhsr33tym3w1"]
+
+[ext_resource type="Script" path="res://Utilities/options_menu.gd" id="1_lw751"]
+[ext_resource type="Theme" uid="uid://byja5y2s5n60f" path="res://Utilities/theme.tres" id="2_il7s1"]
+[ext_resource type="Script" path="res://Utilities/window_mode_button.gd" id="3_ex8u8"]
+[ext_resource type="Script" path="res://Utilities/resolution_mode_button.gd" id="4_qmro0"]
+[ext_resource type="Script" path="res://Utilities/audio_slider_settings.gd" id="5_oyqhe"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3pme0"]
+font_size = 120
+
+[sub_resource type="LabelSettings" id="LabelSettings_0xw7j"]
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_2aana"]
+font_size = 60
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lw751")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_il7s1")
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Options"
+label_settings = SubResource("LabelSettings_3pme0")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = -470
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 1024)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 140
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 80
+
+[node name="WindowModeButton" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+script = ExtResource("3_ex8u8")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/WindowModeButton"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Window Mode"
+label_settings = SubResource("LabelSettings_0xw7j")
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/WindowModeButton"]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/WindowModeButton"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 50
+alignment = 2
+
+[node name="ResolutionModeButton" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+script = ExtResource("4_qmro0")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/ResolutionModeButton"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Resolution"
+label_settings = SubResource("LabelSettings_0xw7j")
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/ResolutionModeButton"]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/ResolutionModeButton"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 50
+flat = true
+alignment = 2
+
+[node name="AudioSliderSettings" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 80
+
+[node name="Master" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AudioSliderSettings"]
+layout_mode = 2
+theme_override_constants/separation = 80
+script = ExtResource("5_oyqhe")
+bus_name = "Master"
+
+[node name="AudioBus" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AudioSliderSettings/Master"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+text = "Master Volume"
+label_settings = SubResource("LabelSettings_0xw7j")
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AudioSliderSettings/Master"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AudioSliderSettings/Master"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.001
+
+[node name="VSeparator2" type="VSeparator" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AudioSliderSettings/Master"]
+layout_mode = 2
+
+[node name="AudioValue" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AudioSliderSettings/Master"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "100"
+label_settings = SubResource("LabelSettings_0xw7j")
+
+[node name="Music" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AudioSliderSettings"]
+layout_mode = 2
+theme_override_constants/separation = 80
+script = ExtResource("5_oyqhe")
+bus_name = "Music"
+
+[node name="AudioBus" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AudioSliderSettings/Music"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+text = "Master Volume"
+label_settings = SubResource("LabelSettings_0xw7j")
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AudioSliderSettings/Music"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AudioSliderSettings/Music"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.001
+
+[node name="VSeparator2" type="VSeparator" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AudioSliderSettings/Music"]
+layout_mode = 2
+
+[node name="AudioValue" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AudioSliderSettings/Music"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "100"
+label_settings = SubResource("LabelSettings_0xw7j")
+
+[node name="SFX" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AudioSliderSettings"]
+layout_mode = 2
+theme_override_constants/separation = 80
+script = ExtResource("5_oyqhe")
+bus_name = "SFX"
+
+[node name="AudioBus" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AudioSliderSettings/SFX"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+text = "Master Volume"
+label_settings = SubResource("LabelSettings_0xw7j")
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AudioSliderSettings/SFX"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AudioSliderSettings/SFX"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.001
+
+[node name="VSeparator2" type="VSeparator" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AudioSliderSettings/SFX"]
+layout_mode = 2
+
+[node name="AudioValue" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/AudioSliderSettings/SFX"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "100"
+label_settings = SubResource("LabelSettings_0xw7j")
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Controls:
+WASD - Move
+Left Mouse Button - Use Hammer
+Right Mouse Button - Dash"
+label_settings = SubResource("LabelSettings_2aana")
+horizontal_alignment = 1
+
+[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+text = "Back"

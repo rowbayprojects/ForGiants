@@ -1,0 +1,202 @@
+[gd_scene load_steps=19 format=3 uid="uid://djrjel54i4rqg"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_jg05j"]
+[ext_resource type="Texture2D" uid="uid://chtxkqaxuf4al" path="res://Player/player_spritesheet.png" id="2_751c0"]
+[ext_resource type="Texture2D" uid="uid://dt5hdeif1rk2" path="res://Forge/hammer.png" id="3_c1nya"]
+[ext_resource type="AudioStream" uid="uid://gtimslnmrk8h" path="res://Audio/SFX/Dash.wav" id="4_koe7l"]
+[ext_resource type="AudioStream" uid="uid://0jvtcqffy4kq" path="res://Audio/SFX/Jump.ogg" id="4_ug8mu"]
+[ext_resource type="AudioStream" uid="uid://c48jhgbjg5i46" path="res://Audio/SFX/Metal.ogg" id="5_83lwg"]
+[ext_resource type="AudioStream" uid="uid://ilxuj64fbpjt" path="res://Audio/SFX/Hammer.wav" id="5_d85hv"]
+[ext_resource type="AudioStream" uid="uid://be6rfgwdigbde" path="res://Audio/SFX/Hurt.wav" id="8_odsxx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nmuyh"]
+size = Vector2(10, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iumca"]
+size = Vector2(30, 36)
+
+[sub_resource type="Animation" id="Animation_ulwca"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rotatable/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_8aouc"]
+resource_name = "fall"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rotatable/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_m7uih"]
+resource_name = "hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rotatable/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+
+[sub_resource type="Animation" id="Animation_h86ox"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rotatable/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_d83qc"]
+resource_name = "jump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rotatable/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_chct7"]
+resource_name = "run"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rotatable/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_a66rj"]
+resource_name = "wall_slide"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rotatable/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ehxnv"]
+_data = {
+"RESET": SubResource("Animation_ulwca"),
+"fall": SubResource("Animation_8aouc"),
+"hurt": SubResource("Animation_m7uih"),
+"idle": SubResource("Animation_h86ox"),
+"jump": SubResource("Animation_d83qc"),
+"run": SubResource("Animation_chct7"),
+"wall_slide": SubResource("Animation_a66rj")
+}
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 42
+script = ExtResource("1_jg05j")
+
+[node name="Rotatable" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="Rotatable"]
+target_position = Vector2(5.1, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Rotatable"]
+texture = ExtResource("2_751c0")
+hframes = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_nmuyh")
+
+[node name="HammerRotator" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="HammerRotator"]
+position = Vector2(0, -10)
+texture = ExtResource("3_c1nya")
+hframes = 3
+
+[node name="Area2D" type="Area2D" parent="HammerRotator"]
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HammerRotator/Area2D"]
+position = Vector2(0, -13)
+shape = SubResource("RectangleShape2D_iumca")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ehxnv")
+}
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ug8mu")
+bus = &"SFX"
+
+[node name="Dash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_koe7l")
+volume_db = -8.107
+bus = &"SFX"
+
+[node name="Hammer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_d85hv")
+volume_db = -3.748
+bus = &"SFX"
+
+[node name="Metal" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_83lwg")
+volume_db = -5.14
+bus = &"SFX"
+
+[node name="Hurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_odsxx")
+volume_db = -5.14
+bus = &"SFX"
+
+[connection signal="body_entered" from="HammerRotator/Area2D" to="." method="_on_area_2d_body_entered"]

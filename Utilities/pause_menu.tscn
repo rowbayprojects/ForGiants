@@ -1,0 +1,95 @@
+[gd_scene load_steps=8 format=3 uid="uid://e0viet47vc73"]
+
+[ext_resource type="Theme" uid="uid://byja5y2s5n60f" path="res://Utilities/theme.tres" id="1_bokft"]
+[ext_resource type="Script" path="res://Utilities/pause_menu.gd" id="1_ry5ml"]
+[ext_resource type="FontFile" uid="uid://v7bfuoxqcegb" path="res://Player/Minimal5x7.ttf" id="3_iyh2n"]
+[ext_resource type="PackedScene" uid="uid://bqhsr33tym3w1" path="res://Utilities/options_menu.tscn" id="4_r6jk2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1ds3c"]
+font = ExtResource("3_iyh2n")
+font_size = 100
+
+[sub_resource type="InputEventAction" id="InputEventAction_q0dmf"]
+action = &"pause"
+pressed = true
+
+[sub_resource type="Shortcut" id="Shortcut_s07hd"]
+events = [SubResource("InputEventAction_q0dmf")]
+
+[node name="PauseMenu" type="ColorRect" groups=["pause_menu"]]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_bokft")
+color = Color(1, 1, 1, 0)
+script = ExtResource("1_ry5ml")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.337255, 0.113725, 0, 0.435294)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(1024, 512)
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "The game is paused"
+label_settings = SubResource("LabelSettings_1ds3c")
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+disabled = true
+shortcut = SubResource("Shortcut_s07hd")
+shortcut_in_tooltip = false
+text = "Resume"
+
+[node name="OptionsButton" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+disabled = true
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+disabled = true
+text = "Quit"
+
+[node name="OptionsMenu" parent="." instance=ExtResource("4_r6jk2")]
+visible = false
+layout_mode = 1
+
+[connection signal="exit_options_menu" from="OptionsMenu" to="." method="_on_options_menu_exit_options_menu"]

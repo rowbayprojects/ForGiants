@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://cce82gio4pynw"]
+
+[ext_resource type="Script" path="res://Player/camera_man.gd" id="1_p8y7p"]
+[ext_resource type="Texture2D" uid="uid://ctb06kkv7wh5" path="res://Utilities/black_bars.png" id="2_vpmn7"]
+
+[node name="CameraMan" type="CharacterBody2D" groups=["camera_man"]]
+script = ExtResource("1_p8y7p")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(6, 6)
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(320, 180)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_vpmn7")
+expand_mode = 3

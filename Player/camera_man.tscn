@@ -1,0 +1,154 @@
+[gd_scene load_steps=13 format=3 uid="uid://cce82gio4pynw"]
+
+[ext_resource type="Script" path="res://Player/camera_man.gd" id="1_p8y7p"]
+[ext_resource type="Texture2D" uid="uid://ctb06kkv7wh5" path="res://Utilities/black_bars.png" id="2_vpmn7"]
+[ext_resource type="Script" path="res://Player/DialogBox.gd" id="3_bqo44"]
+[ext_resource type="Texture2D" uid="uid://dp65ig3uw01o7" path="res://Player/hurt_screen.png" id="3_ecd6m"]
+[ext_resource type="Texture2D" uid="uid://de0c46flv0u5l" path="res://Player/ui_dialog_box.png" id="4_08gx4"]
+[ext_resource type="Texture2D" uid="uid://nn75qpwyk427" path="res://Player/hammer.png" id="5_410ik"]
+[ext_resource type="FontFile" uid="uid://v7bfuoxqcegb" path="res://Player/Minimal5x7.ttf" id="7_324l0"]
+[ext_resource type="PackedScene" uid="uid://e0viet47vc73" path="res://Utilities/pause_menu.tscn" id="8_bl210"]
+[ext_resource type="Texture2D" uid="uid://dsxhlg6nbsfxm" path="res://Player/coin_icon.png" id="9_daaox"]
+[ext_resource type="Texture2D" uid="uid://deeiiahqutgmc" path="res://Forge/ore_icon.png" id="10_7ogbn"]
+[ext_resource type="LabelSettings" uid="uid://btr2ca8cvinbl" path="res://Player/ui.tres" id="11_u7eix"]
+
+[sub_resource type="Theme" id="Theme_picgm"]
+default_font = ExtResource("7_324l0")
+default_font_size = 80
+
+[node name="CameraMan" type="CharacterBody2D" groups=["camera_man"]]
+script = ExtResource("1_p8y7p")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(6, 6)
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(320, 180)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_vpmn7")
+expand_mode = 3
+
+[node name="DialogBox" type="CanvasLayer" parent="Control" groups=["dialog_box"]]
+script = ExtResource("3_bqo44")
+
+[node name="TextureRect2" type="TextureRect" parent="Control/DialogBox"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ecd6m")
+
+[node name="DialogBox" type="TextureRect" parent="Control/DialogBox"]
+visible = false
+modulate = Color(1, 1, 1, 0.654902)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -591.0
+offset_right = 1329.0
+offset_bottom = 429.0
+grow_horizontal = 2
+scale = Vector2(0.8, 0.8)
+size_flags_horizontal = 4
+texture = ExtResource("4_08gx4")
+
+[node name="TextureRect" type="TextureRect" parent="Control/DialogBox"]
+visible = false
+offset_left = 396.0
+offset_top = 29.0
+offset_right = 760.001
+offset_bottom = 393.0
+scale = Vector2(0.8, 0.8)
+size_flags_horizontal = 4
+texture = ExtResource("5_410ik")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/DialogBox"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 705.165
+offset_top = 46.015
+offset_right = 239.165
+offset_bottom = -709.985
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+size_flags_horizontal = 4
+theme = SubResource("Theme_picgm")
+text = "Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text Placeholder text "
+scroll_active = false
+
+[node name="Timer" type="Timer" parent="Control/DialogBox"]
+wait_time = 5.0
+
+[node name="UI" type="CanvasLayer" parent="Control"]
+
+[node name="Control" type="Control" parent="Control/UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Money" type="Control" parent="Control/UI/Control"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/UI/Control/Money"]
+position = Vector2(64, 64)
+scale = Vector2(4, 4)
+texture = ExtResource("9_daaox")
+
+[node name="Label" type="Label" parent="Control/UI/Control/Money"]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 36.0
+offset_right = 246.0
+offset_bottom = 103.0
+text = "100"
+label_settings = ExtResource("11_u7eix")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ore" type="Control" parent="Control/UI/Control"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D2" type="Sprite2D" parent="Control/UI/Control/Ore"]
+position = Vector2(64, 160)
+scale = Vector2(4, 4)
+texture = ExtResource("10_7ogbn")
+
+[node name="Label2" type="Label" parent="Control/UI/Control/Ore"]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 136.0
+offset_right = 246.0
+offset_bottom = 203.0
+text = "100"
+label_settings = ExtResource("11_u7eix")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseMenu" parent="Control/UI" instance=ExtResource("8_bl210")]
+
+[connection signal="timeout" from="Control/DialogBox/Timer" to="Control/DialogBox" method="_on_timer_timeout"]

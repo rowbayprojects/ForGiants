@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://djrjel54i4rqg"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_jg05j"]
+[ext_resource type="Texture2D" uid="uid://8aw7m876rtv0" path="res://Player/player_sprite.png" id="2_ai2lm"]
+[ext_resource type="Texture2D" uid="uid://dt5hdeif1rk2" path="res://Level/hammer.png" id="3_c1nya"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nmuyh"]
+size = Vector2(10, 14)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_jg05j")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ai2lm")
+
+[node name="Rotatable" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="Rotatable"]
+target_position = Vector2(6, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_nmuyh")
+
+[node name="HammerRotator" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="HammerRotator"]
+position = Vector2(0, -10)
+texture = ExtResource("3_c1nya")
+
+[node name="BlackBars" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
